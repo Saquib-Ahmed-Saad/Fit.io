@@ -1,7 +1,5 @@
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../models/habit.dart';
 import '../models/habit_log.dart';
 
@@ -20,16 +18,16 @@ class FitioDatabase {
   Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
-    final appDir = await getApplicationDocumentsDirectory();
-    final dbPath = join(appDir.path, _databaseName);
-    _database = await openDatabase(
-      dbPath,
-      version: _databaseVersion,
-      onCreate: _onCreate,
-    );
-    return _database!;
-  }
+  if (_database != null) return _database!;
+  final dbPath = await getDatabasesPath();
+  final path   = join(dbPath, _databaseName);
+  _database = await openDatabase(
+    path,
+    version: _databaseVersion,
+    onCreate: _onCreate,
+  );
+  return _database!;
+}
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
