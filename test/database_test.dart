@@ -105,7 +105,6 @@ void main() {
       expect(updated?.frequency, equals('Weekly'));
     });
   });
-
   // GROUP 4: Habits DELETE / ARCHIVE
 
   group('Habits — DELETE / ARCHIVE', () {
