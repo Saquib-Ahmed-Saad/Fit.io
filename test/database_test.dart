@@ -211,7 +211,7 @@ void main() {
       expect(fetched?.createdDate.year,  equals(2026));
       expect(fetched?.createdDate.month, equals(3));
       expect(fetched?.createdDate.day,   equals(18));
-    });
+    }); 
 
     test('19. HabitLog completionDate survives toMap/fromMap round-trip',
         () async {
@@ -222,7 +222,7 @@ void main() {
       expect(logs.first.completionDate.year,  equals(2026));
       expect(logs.first.completionDate.month, equals(3));
       expect(logs.first.completionDate.day,   equals(15));
-    });
+    }); 
 
     test('20. getHabits only returns active (non-archived) habits', () async {
       await db.clearAllData();
