@@ -53,3 +53,29 @@ void main() {
       expect(find.text('Drink Water'), findsOneWidget);
     });
 
+testWidgets('Progress tab navigates correctly', (tester) async {
+      app.main();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(find.text('Progress'));
+      await tester.pumpAndSettle();
+      expect(find.text('Weekly Completion Chart'), findsOneWidget);
+    });
+
+    testWidgets('Settings tab navigates correctly', (tester) async {
+      app.main();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(find.text('Settings'));
+      await tester.pumpAndSettle();
+      expect(find.text('Dark mode'), findsOneWidget);
+    });
+
+    testWidgets('Dark mode toggle works without crash', (tester) async {
+      app.main();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(find.text('Settings'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(SwitchListTile).first);
+      await tester.pumpAndSettle();
+      expect(find.text('Settings'), findsOneWidget);
+    });
+
