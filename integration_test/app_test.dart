@@ -79,3 +79,39 @@ testWidgets('Progress tab navigates correctly', (tester) async {
       expect(find.text('Settings'), findsOneWidget);
     });
 
+testWidgets('Tapping a habit opens HabitDetailsScreen', (tester) async {
+      app.main();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      // Create a habit first
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'e.g. Read 20 minutes'),
+          'Morning Stretch');
+      await tester.tap(find.text('Save Habit'));
+      await tester.pumpAndSettle();
+      // Tap it
+      await tester.tap(find.text('Morning Stretch'));
+      await tester.pumpAndSettle();
+      expect(find.text('Habit Details'), findsOneWidget);
+    });
+
+    testWidgets('Delete button shows confirmation dialog', (tester) async {
+      app.main();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+          find.widgetWithText(TextFormField, 'e.g. Read 20 minutes'),
+          'ToDeleteHabit');
+      await tester.tap(find.text('Save Habit'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('ToDeleteHabit'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.delete_outline));
+      await tester.pumpAndSettle();
+      expect(find.text('Delete Habit'), findsOneWidget);
+      expect(find.text('Cancel'),       findsOneWidget);
+    });
+  });
+}
