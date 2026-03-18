@@ -1,8 +1,6 @@
 // Widget tests for Fit.io screens and widgets.
 // Saquib Ahmed wrote the WeeklyChart test.
 // Brendon Huang added all remaining tests.
-//
-// Run: flutter test test/widget_test.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -131,3 +129,99 @@ void main() {
     ));
     expect(find.textContaining('Weekly'), findsOneWidget);
   });
+
+  // CreateEditHabitScreen
+
+  testWidgets('CreateEditHabitScreen shows Create Habit title', (tester) async {
+    final repo = HabitRepository(database: FitioDatabase.instance);
+    await tester.pumpWidget(MaterialApp(
+      home: CreateEditHabitScreen(repository: repo),
+    ));
+    await tester.pump();
+    expect(find.text('Create Habit'), findsOneWidget);
+  });
+
+  testWidgets('CreateEditHabitScreen validates empty name', (tester) async {
+    final repo = HabitRepository(database: FitioDatabase.instance);
+    await tester.pumpWidget(MaterialApp(
+      home: CreateEditHabitScreen(repository: repo),
+    ));
+    await tester.pump();
+    // Tap the Save button without entering a name
+    await tester.tap(find.text('Save Habit'));
+    await tester.pump();
+    expect(find.text('Habit name is required.'), findsOneWidget);
+  });
+
+  testWidgets('CreateEditHabitScreen shows Edit Habit title in edit mode',
+      (tester) async {
+    final habit = Habit(
+      id: 1, name: 'Existing', description: 'desc',
+      frequency: 'Daily', createdDate: DateTime(2026, 1, 1),
+    );
+    final repo = HabitRepository(database: FitioDatabase.instance);
+    await tester.pumpWidget(MaterialApp(
+      home: CreateEditHabitScreen(repository: repo, habit: habit),
+    ));
+    await tester.pump();
+    expect(find.text('Edit Habit'), findsOneWidget);
+  });
+
+  testWidgets('CreateEditHabitScreen pre-fills name in edit mode',
+      (tester) async {
+    final habit = Habit(
+      id: 2, name: 'Evening Walk', description: '',
+      frequency: 'Daily', createdDate: DateTime(2026, 1, 1),
+    );
+    final repo = HabitRepository(database: FitioDatabase.instance);
+    await tester.pumpWidget(MaterialApp(
+      home: CreateEditHabitScreen(repository: repo, habit: habit),
+    ));
+    await tester.pump();
+    expect(find.text('Evening Walk'), findsOneWidget);
+  });
+
+  testWidgets('CreateEditHabitScreen has Daily, Weekly, Custom frequency options',
+      (tester) async {
+    final repo = HabitRepository(database: FitioDatabase.instance);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(body: CreateEditHabitScreen(repository: repo)),
+    ));
+    await tester.pump();
+    // Open frequency dropdown
+    await tester.tap(find.byType(DropdownButtonFormField<String>));
+    await tester.pumpAndSettle();
+    expect(find.text('Daily'),  findsWidgets);
+    expect(find.text('Weekly'), findsOneWidget);
+    expect(find.text('Custom'), findsOneWidget);
+  });
+
+  // SettingsScreen
+
+  testWidgets('SettingsScreen shows dark mode toggle', (tester) async {
+    final controller = AppController();
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(body: SettingsScreen(controller: controller)),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.text('Dark mode'), findsOneWidget);
+  });
+
+  testWidgets('SettingsScreen shows notifications toggle', (tester) async {
+    final controller = AppController();
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(body: SettingsScreen(controller: controller)),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.text('Notifications'), findsOneWidget);
+  });
+
+  testWidgets('SettingsScreen shows reset data option', (tester) async {
+    final controller = AppController();
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(body: SettingsScreen(controller: controller)),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.text('Reset data'), findsOneWidget);
+  });
+}
