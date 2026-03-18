@@ -181,8 +181,8 @@ void main() {
       final all = await db.getAllLogs();
       final ids = all.map((l) => l.habitId).toList();
       expect(ids, containsAll([id1, id2]));
-    });
-  });
+    }); 
+  }); 
 
   // GROUP 7: clearAllData
 
