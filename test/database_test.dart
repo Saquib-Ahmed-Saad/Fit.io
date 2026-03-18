@@ -233,6 +233,7 @@ void main() {
       expect(habits.length,              equals(1));
       expect(habits.first.id,            equals(id1));
       expect(habits.every((h) => !h.isArchived), isTrue);
-    });
-  });
-}
+    }); 
+  }); 
+} 
+ 
