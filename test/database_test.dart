@@ -10,9 +10,10 @@ import 'package:fit_io/fitio/models/habit_log.dart';
 
 void main() {
   setUpAll(() {
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-  });
+  TestWidgetsFlutterBinding.ensureInitialized();
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+});
 
   final db = FitioDatabase.instance;
 
