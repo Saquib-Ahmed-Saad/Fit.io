@@ -28,7 +28,6 @@ class HabitRepository {
   Future<int> deleteHabit(int habitId) => _database.deleteHabit(habitId);
 
   // Logs
-
   Future<List<HabitLog>> getLogsForHabit(int habitId) =>
       _database.getLogsForHabit(habitId);
 
