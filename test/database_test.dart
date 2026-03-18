@@ -194,8 +194,8 @@ void main() {
       final logs   = await db.getAllLogs();
       expect(habits, isEmpty);
       expect(logs,   isEmpty);
-    });
-  });
+    }); 
+  }); 
 
   // GROUP 8: Model serialisation
 
