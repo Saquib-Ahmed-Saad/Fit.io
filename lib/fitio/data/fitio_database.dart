@@ -117,7 +117,6 @@ class FitioDatabase {
   // HABIT LOGS
 
   /// Insert or replace a log entry.
-  /// Uses UNIQUE(habit_id, completion_date) to prevent duplicates.
   Future<int> upsertLog(HabitLog log) async {
     final db = await database;
     return db.insert(
