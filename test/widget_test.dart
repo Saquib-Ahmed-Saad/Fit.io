@@ -13,47 +13,46 @@ import 'package:fit_io/fitio/app_controller.dart';
 import 'package:fit_io/fitio/repositories/habit_repository.dart';
 import 'package:fit_io/fitio/data/fitio_database.dart';
 
-// WeeklyChart (Saquib's test)
-
+// WeeklyChart
 void main() {
-  testWidgets('Weekly chart renders all day labels', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: WeeklyChart(values: <int>[1, 2, 3, 4, 5, 6, 7]),
-        ),
+  // Test 1
+testWidgets('Weekly chart renders all day labels', (tester) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: WeeklyChart(values: const <int>[1, 2, 3, 4, 5, 6, 7]),
       ),
-    );
-    expect(find.text('M'), findsOneWidget);
-    expect(find.text('F'), findsOneWidget);
-    expect(find.text('S'), findsNWidgets(2));
-  });
+    ),
+  );
+  expect(find.text('M'), findsOneWidget);
+  expect(find.text('F'), findsOneWidget);
+  expect(find.text('S'), findsNWidgets(2));
+});
 
-  // WeeklyChart additional
-
-  testWidgets('WeeklyChart renders all 7 bar values', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: WeeklyChart(values: <int>[0, 1, 2, 3, 4, 5, 6]),
-        ),
+// Test 2
+testWidgets('WeeklyChart renders all 7 bar values', (tester) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: WeeklyChart(values: const <int>[0, 1, 2, 3, 4, 5, 6]),
       ),
-    );
-    // Values 1–6 should appear as text labels above each bar
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('6'), findsOneWidget);
-  });
+    ),
+  );
+  expect(find.text('0'), findsOneWidget);
+  expect(find.text('6'), findsOneWidget);
+});
 
-  testWidgets('WeeklyChart shows animated containers for bars', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: WeeklyChart(values: <int>[1, 1, 1, 1, 1, 1, 1]),
-        ),
+// Test 3
+testWidgets('WeeklyChart shows animated containers for bars', (tester) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: WeeklyChart(values: const <int>[1, 1, 1, 1, 1, 1, 1]),
       ),
-    );
-    expect(find.byType(AnimatedContainer), findsNWidgets(7));
-  });
+    ),
+  );
+  expect(find.byType(AnimatedContainer), findsNWidgets(7));
+});
 
   // HabitTile
 
