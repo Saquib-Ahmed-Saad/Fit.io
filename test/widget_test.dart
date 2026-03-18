@@ -56,4 +56,78 @@ void main() {
     );
     expect(find.byType(AnimatedContainer), findsNWidgets(7));
   });
-  
+
+  // HabitTile
+
+  testWidgets('HabitTile renders habit name', (tester) async {
+    final habit = Habit(
+      name: 'Morning Run', description: '',
+      frequency: 'Daily', createdDate: DateTime(2026, 1, 1),
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: HabitTile(
+          habit: habit,
+          isCompletedToday: false,
+          onMarkComplete: () {},
+          onTap: () {},
+        ),
+      ),
+    ));
+    expect(find.text('Morning Run'), findsOneWidget);
+  });
+
+  testWidgets('HabitTile shows Complete button when not done', (tester) async {
+    final habit = Habit(
+      name: 'Yoga', description: '',
+      frequency: 'Daily', createdDate: DateTime(2026, 1, 1),
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: HabitTile(
+          habit: habit,
+          isCompletedToday: false,
+          onMarkComplete: () {},
+          onTap: () {},
+        ),
+      ),
+    ));
+    expect(find.text('Complete'), findsOneWidget);
+  });
+
+  testWidgets('HabitTile shows Done and disables button when completed',
+      (tester) async {
+    final habit = Habit(
+      name: 'Read', description: '',
+      frequency: 'Daily', createdDate: DateTime(2026, 1, 1),
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: HabitTile(
+          habit: habit,
+          isCompletedToday: true,
+          onMarkComplete: () {},
+          onTap: () {},
+        ),
+      ),
+    ));
+    expect(find.text('Done'), findsOneWidget);
+  });
+
+  testWidgets('HabitTile shows frequency and created date', (tester) async {
+    final habit = Habit(
+      name: 'Walk', description: '',
+      frequency: 'Weekly', createdDate: DateTime(2026, 1, 15),
+    );
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: HabitTile(
+          habit: habit,
+          isCompletedToday: false,
+          onMarkComplete: () {},
+          onTap: () {},
+        ),
+      ),
+    ));
+    expect(find.textContaining('Weekly'), findsOneWidget);
+  });
