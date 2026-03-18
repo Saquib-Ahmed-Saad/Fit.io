@@ -16,7 +16,7 @@ void main() {
 
   final db = FitioDatabase.instance;
 
-  // Helpers
+  // Helpers 
 
   DateTime ago(int days) {
     final d = DateTime.now().subtract(Duration(days: days));
