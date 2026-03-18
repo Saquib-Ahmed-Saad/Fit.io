@@ -140,14 +140,14 @@ void main() {
       await db.upsertLog(HabitLog(habitId: id, completionDate: ago(0)));
       final done = await db.isCompletedOnDate(id, ago(0));
       expect(done, isTrue);
-    });
+    }); 
 
     test('13. log for past date does not affect today', () async {
       final id = await db.createHabit(makeHabit(name: 'Past Log'));
       await db.upsertLog(HabitLog(habitId: id, completionDate: ago(3)));
       final done = await db.isCompletedOnDate(id, ago(0));
       expect(done, isFalse);
-    });
+    }); 
 
     test('14. UNIQUE constraint prevents duplicate entries for same date',
         () async {
@@ -157,7 +157,7 @@ void main() {
       final logs  = await db.getLogsForHabit(id);
       final today = logs.where((l) => l.status).length;
       expect(today, equals(1));
-    });
+    }); 
 
     test('15. upsertLog with status=false marks as not completed', () async {
       final id = await db.createHabit(makeHabit(name: 'Toggle'));
@@ -167,8 +167,8 @@ void main() {
           HabitLog(habitId: id, completionDate: ago(0), status: false));
       final done = await db.isCompletedOnDate(id, ago(0));
       expect(done, isFalse);
-    });
-  });
+    }); 
+  }); 
 
   // GROUP 6: getAllLogs
 
