@@ -113,14 +113,14 @@ void main() {
       await db.archiveHabit(id);
       final habits = await db.getHabits();
       expect(habits.map((h) => h.id), isNot(contains(id)));
-    });
+    }); 
 
     test('10. deleteHabit permanently removes the habit', () async {
       final id = await db.createHabit(makeHabit(name: 'ToDelete'));
       await db.deleteHabit(id);
       final h = await db.getHabit(id);
       expect(h, isNull);
-    });
+    }); 
 
     test('11. deleteHabit cascades and removes all logs', () async {
       final id = await db.createHabit(makeHabit(name: 'CascadeTest'));
