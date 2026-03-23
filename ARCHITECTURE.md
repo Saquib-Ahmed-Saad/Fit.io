@@ -197,3 +197,37 @@ Potential next steps that require minimal refactoring:
 - Add a notification scheduler service using `flutter_local_notifications`
 - Add an export/import service for backup and restore workflows
 - Migrate global state to Provider or Riverpod for more reactive UI updates
+
+
+## Team Contributions
+
+### Saquib Ahmed — UI Design, Database Schema, GitHub Management
+
+- Designed and implemented all 7 screens (Splash, HomeShell, Dashboard, CreateEdit, Details, Progress, Settings)
+- Created the SQLite database schema for habits and habit_logs tables
+- Implemented AppController (ChangeNotifier) for global theme state
+- Built HabitTile and WeeklyChart reusable widgets
+- Set up the GitHub repository, branch strategy, and pull request workflow
+- Wrote HabitMetricsService structure and habit_metrics_service_test.dart
+- Wrote DashboardSummary model and SettingsService
+
+### Brendon Huang — Navigation, Testing, Documentation, Demo Video
+
+- Fixed critical DateTime type mismatch in Habit and HabitLog models so screens compile
+- Added all CRUD methods to FitioDatabase (createHabit, getHabits, updateHabit, archiveHabit, deleteHabit, upsertLog, getAllLogs, isCompletedOnDate, clearAllData)
+- Fixed date format bug in HabitRepository — replaced toIso8601String() with yyyy-MM-dd format
+- Fixed HabitMetricsService compile error
+- Wrote 20 database unit tests using sqflite_common_ffi
+- Wrote widget tests for all key UI components
+- Wrote 10 end-to-end integration tests
+- Maintained README.md, ARCHITECTURE.md, and code comments
+
+### Version Control Summary
+
+| Branch | Author | Description |
+|--------|--------|-------------|
+| feature/data-layer | Brendon Huang | DateTime model fixes, CRUD methods, repository bug fixes |
+| feature/testing | Brendon Huang | All test files, pubspec test dependencies |
+| feature/documentation | Brendon Huang | README, ARCHITECTURE, code comments |
+| feature/screens | Saquib Ahmed | All screens, widgets, app controller |
+| feature/database | Saquib Ahmed | Database schema, models, services |
