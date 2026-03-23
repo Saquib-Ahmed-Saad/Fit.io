@@ -7,6 +7,7 @@ Fit.io is an offline-first habit tracker built with Flutter for Mobile App Devel
 | Name | Student ID | Role |
 
 | Saquib Ahmed | 002742960 | UI Design, Database Implementation, GitHub Management |
+
 | Brendon Huang | 002771859 | Navigation Flow, Testing, Documentation, Demo Video |
 
 ## Features
